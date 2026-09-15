@@ -1,0 +1,35 @@
+# Локальное состояние интерфейса Obsidian
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache/
+
+# Корзина Obsidian
+.trash/
+
+# Локальные данные и сессии Claudian
+.claudian/
+
+# Секреты проекта
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+
+# Jupyter
+.ipynb_checkpoints/
+# Локальные notebook-first лаборатории; официальный код живёт в src/
+notebooks/workbench/
+
+# Локальные исходные и производные датасеты
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Локальные модели и полные результаты запусков
+artifacts/*
+!artifacts/_index.md

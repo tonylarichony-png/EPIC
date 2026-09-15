@@ -1,0 +1,16 @@
+# Core notebooks
+numpy
+pandas
+matplotlib
+seaborn
+jupyterlab
+
+# Baseline modeling
+scikit-learn
+joblib
+
+# Optional model-screening groups (not imported until the group is selected)
+xgboost
+lightgbm
+catboost
+

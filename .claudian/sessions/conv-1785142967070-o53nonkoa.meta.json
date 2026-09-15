@@ -1,0 +1,28 @@
+{
+  "id": "conv-1785142967070-o53nonkoa",
+  "providerId": "codex",
+  "title": "Создай в Obsidian такую структуру:",
+  "titleGenerationStatus": "failed",
+  "createdAt": 1785142967070,
+  "updatedAt": 1785490319240,
+  "lastResponseAt": 1785490319240,
+  "sessionId": "019fa2cf-fba7-7883-801d-0db27a8da478",
+  "selectedModel": "gpt-5.6-sol",
+  "providerState": {
+    "threadId": "019fa2cf-fba7-7883-801d-0db27a8da478",
+    "sessionFilePath": "C:\\Users\\Антон\\.codex\\sessions\\2026\\07\\27\\rollout-2026-07-27T12-02-52-019fa2cf-fba7-7883-801d-0db27a8da478.jsonl",
+    "transcriptRootPath": "C:\\Users\\Антон\\.codex\\sessions",
+    "workspaceDependencyToolVersion": 1
+  },
+  "currentNote": "README.md",
+  "usage": {
+    "inputTokens": 180420,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 179968,
+    "contextWindow": 258400,
+    "contextWindowIsAuthoritative": true,
+    "contextTokens": 180420,
+    "percentage": 70,
+    "model": "gpt-5.6-sol"
+  }
+}
