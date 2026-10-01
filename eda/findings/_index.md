@@ -17,6 +17,8 @@ tags:
 
 ## Все наблюдения
 
+- [[eda/findings/EDA-005.md|EDA-005 — полный AP-screening региональных динуклеотидов EXP-010]]: GG +4.445%, TA +3.920%, TG +2.860%; окончательный gate ожидает Spearman и validation.
+
 ```dataview
 TABLE WITHOUT ID
   link(file.path, id + " — " + title) AS "Наблюдение",

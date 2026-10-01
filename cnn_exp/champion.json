@@ -1,0 +1,6 @@
+{
+  "experiment_id": "CNN-EXP-005",
+  "notebook": "notebooks/experiments/CNN_experiments/CNN_EXP005_step_exp.ipynb",
+  "metrics": "artifacts/experiments/CNN_EXP005/run_001/validation_metrics.csv",
+  "checkpoint": "artifacts/experiments/CNN_EXP005/run_001/model_step_10000.pt"
+}

@@ -12,7 +12,8 @@ dataset_version:
 code_version:
 model:
 seed:
-primary_metric:
+primary_metric: average_precision
+secondary_metric: epic_spearman
 result:
 baseline_delta:
 decision: pending
@@ -42,8 +43,9 @@ tags:
 - **Что меняем:**
 - **Что остаётся фиксированным:**
 - **Почему ожидаем эффект:**
-- **Критерий успеха:**
-- **Guardrails:**
+- **Критерий успеха по Average Precision:**
+- **Критерий успеха / guardrail по EPIC Spearman:**
+- **Дополнительные guardrails:**
 - **Бюджет / stop condition:**
 
 ## Setup
@@ -93,7 +95,8 @@ tags:
 
 | Split / fold | Metric | Baseline | Result | Δ | Notes |
 |---|---|---:|---:|---:|---|
-|  |  |  |  |  |  |
+| validation | Average Precision |  |  |  | все позиции |
+| validation | EPIC Spearman |  |  |  | dense ranks, только `target > 0` |
 
 ### Guardrails и сегменты
 

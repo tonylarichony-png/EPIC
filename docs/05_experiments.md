@@ -3,7 +3,7 @@ type: stage
 stage: experiments
 status: draft
 owner:
-last_reviewed:
+last_reviewed: 2026-09-18
 tags:
   - ml/stage
   - ml/experiments
@@ -17,7 +17,7 @@ tags:
 > Сравнимый журнал проверок: что изменили, почему ожидали эффект, при каких условиях запускали, что получили и какое решение приняли.
 
 > [!tip] Следующий эксперимент
-> Начните с [[README.md#Как начать новый эксперимент|короткой инструкции в карточке проекта]]. Подробный процесс описан в [[GUIDE.md#Новый эксперимент|руководстве]].
+> Начните с [[README.md#Как начать новый эксперимент|короткой инструкции в карточке проекта]]. Геномный notebook-first процесс и общий data contract описаны в [[docs/epic_experiment_workflow.md]].
 
 > [!tip] Выбор семейства модели
 > После стабилизации feature set используйте [[notebooks/06_model_screening.ipynb|групповой screening]]. Его карточки и общий список находятся в [[model-screening/_index.md]].
@@ -37,43 +37,45 @@ tags:
 
 | Поле | Значение |
 |---|---|
-| Эксперимент / версия |  |
-| Данные |  |
-| Модель |  |
-| Основная метрика |  |
-| Значение |  |
-| Стоимость / latency |  |
+| Эксперимент / версия | [[experiments/EXP-001.md|EXP-001]], `run_001` |
+| Данные | `jaNemVect1.1`, `contig_holdout_v1`, полный train/validation |
+| Модель | L2 logistic regression; ориентированный динуклеотид `[-1,0]`; 17 категорий |
+| Обязательные метрики | Average Precision; EPIC Spearman |
+| Значение | AP **0.001330258**; EPIC Spearman **0.090720** |
+| Стоимость / latency | 34 агрегированные solver-строки; fit ≈ 0.09 s после полного подсчёта категорий |
 
 <!-- auto:current-baseline:end -->
 
-Блок может быть синхронизирован из [[notebooks/03_baseline.ipynb]] после
-проверки результата. Полный контекст запуска всё равно фиксируется отдельной
-заметкой в [[experiments/_index.md]].
+Полный контекст запуска зафиксирован в [[experiments/EXP-001.md]] и выполненном
+[[notebooks/experiments/EXP-001_dinucleotide_baseline.ipynb|notebook]].
 
-## Последний зафиксированный эксперимент
+## Последний завершённый validation-эксперимент
 
 <!-- auto:latest-experiment:start -->
 
 | Поле | Значение |
 |---|---|
-| Эксперимент |  |
-| Гипотеза |  |
-| Изменение |  |
-| Метрика |  |
-| Reference |  |
-| Кандидат |  |
-| Δ к reference |  |
-| Решение |  |
+| Эксперимент | [[experiments/EXP-009.md|EXP-009 — fixed CpG O/E201 bins]] |
+| Гипотеза | Региональный CpG O/E содержит сигнал сверх GC201-bin |
+| Изменение | Fixed CpG O/E201 bins поверх EXP-007 |
+| Average Precision: reference / candidate / relative Δ | 0.002053635 / **0.002363735** / +15.10% |
+| EPIC Spearman: reference / candidate / Δ | 0.104302 / **0.115517** / +0.011215 |
+| Решение | `adopt`: текущий подтверждённый champion |
 
 <!-- auto:latest-experiment:end -->
 
-Блок обновляется из [[notebooks/04_experiment.ipynb]]. Полный автоматический отчёт и ручной вывод хранятся в карточке эксперимента.
+Для новых геномных экспериментов машинная запись сохраняется последней ячейкой
+отдельного `notebooks/experiments/EXP-xxx_*.ipynb`, а краткий человеческий вывод
+хранится в карточке с тем же `EXP-ID`.
 
 ## Лучший измеренный результат
 
 <!-- auto:best-measured-result:start -->
 
-Блок появится после синхронизации baseline или контролируемого эксперимента.
+[[experiments/EXP-009.md|EXP-009]]: hierarchical `2/4/6-mer` LR с fixed
+GC201-bins и CpG O/E201-bins, validation AP **0.002363735**, EPIC Spearman **0.115517**.
+[[experiments/EXP-003.md|EXP-003]] остаётся историческим champion lookup-серии,
+а [[experiments/EXP-001.md|EXP-001]] — исходным baseline.
 
 <!-- auto:best-measured-result:end -->
 
@@ -83,12 +85,33 @@ tags:
 
 | Experiment | Hypothesis | Change | Metric | Reference | Result | Δ | Decision |
 |---|---|---|---|---:|---:|---:|---|
-|  |  |  |  |  |  |  |  |
+| [[experiments/EXP-001.md|EXP-001]] | Пара `[-1,0]` содержит сигнал | Constant → dinucleotide LR | Average Precision | 0.000670644 | **0.001330258** | **+0.000659614** | `adopt` |
+| [[experiments/EXP-001.md|EXP-001]] | Пара `[-1,0]` содержит сигнал | Constant → dinucleotide LR | EPIC Spearman | 0.000000 | **0.090720** | **+0.090720** | `adopt` |
+| [[experiments/EXP-002.md|EXP-002]] | 4-mer содержит сигнал сверх пары | 2-mer → 4-mer lookup | Average Precision | 0.001330258 | **0.001486787** | **+11.77%** | `adopt` |
+| [[experiments/EXP-002.md|EXP-002]] | 4-mer содержит сигнал сверх пары | 2-mer → 4-mer lookup | EPIC Spearman | 0.090720 | **0.094232** | **+0.003512** | `adopt` |
+| [[experiments/EXP-003.md|EXP-003]] | 6-mer содержит сигнал сверх 4-mer | 4-mer → 6-mer lookup | Average Precision | 0.001486787 | **0.001600537** | **+7.65%** | `adopt` |
+| [[experiments/EXP-003.md|EXP-003]] | 6-mer содержит сигнал сверх 4-mer | 4-mer → 6-mer lookup | EPIC Spearman | 0.094232 | **0.097186** | **+0.002954** | `adopt` |
+| [[experiments/EXP-004.md|EXP-004]] | 8-mer содержит сигнал сверх 6-mer | 6-mer → 8-mer lookup | Average Precision | 0.001600537 | 0.001603481 | +0.18% | `reject` |
+| [[experiments/EXP-004.md|EXP-004]] | 8-mer содержит сигнал сверх 6-mer | 6-mer → 8-mer lookup | EPIC Spearman | **0.097186** | 0.092203 | −0.004983 | `reject` |
+| [[experiments/EXP-005.md|EXP-005]] | LR обучит hierarchical backoff лучше lookup | 6-mer lookup → 2/4/6-mer LR | Average Precision | 0.001600537 | 0.001606098 | +0.35% | `reject` |
+| [[experiments/EXP-006.md|EXP-006]] | Linear GC201 добавит региональный сигнал | EXP-005 + linear GC201 | Average Precision | **0.001606098** | 0.001573742 | −2.02% | `reject` |
+| [[experiments/EXP-007.md|EXP-007]] | GC201 имеет немонотонную форму | Linear GC201 → fixed bins | Average Precision | 0.001600537 | **0.002053635** | **+28.31%** | `adopt` |
+| [[experiments/EXP-007.md|EXP-007]] | GC201 имеет немонотонную форму | Linear GC201 → fixed bins | EPIC Spearman | 0.097186 | **0.104302** | **+0.007117** | `adopt` |
+| [[experiments/EXP-008.md|EXP-008]] | Эффект k2 зависит от GC201-bin | EXP-007 + 128 interactions | Average Precision | 0.002053635 | 0.002064290 | +0.519% | `reject` |
+| [[experiments/EXP-008.md|EXP-008]] | Эффект k2 зависит от GC201-bin | EXP-007 + 128 interactions | EPIC Spearman | **0.104302** | 0.104167 | −0.000135 | `reject` |
+| [[experiments/EXP-009.md|EXP-009]] | CpG O/E201 несёт сигнал сверх GC | EXP-007 + fixed CpG bins | Average Precision | 0.002053635 | **0.002363735** | +15.10% | `adopt` |
+| [[experiments/EXP-009.md|EXP-009]] | CpG O/E201 несёт сигнал сверх GC | EXP-007 + fixed CpG bins | EPIC Spearman | 0.104302 | **0.115517** | +0.011215 | `adopt` |
 
 <!-- auto:experiment-leaderboard:end -->
 
 > [!tip]
 > Leaderboard содержит только сопоставимые результаты. Полный протокол хранится в отдельных заметках [[experiments/_index.md]].
+
+## Текущий feature-screening: EXP-010
+
+[[experiments/EXP-010.md|EXP-010]] завершил AP-screening 15 региональных пар: 45 fit сошлись. Mean train-CV AP reference EXP-009 — 0.002672437559; лучшие отдельные добавки: GG 0.002791222 (+4.445%), TA 0.002777185 (+3.920%), TG 0.002748877 (+2.860%). Полная таблица и интерпретация: [[eda/findings/EDA-005.md|EDA-005]].
+
+Это **train-CV**, не validation-метрики из leaderboard. Полного Spearman-screening нет; gate и решение остаются pending. Предложение следующей проверки: [[experiment-ideas/IDEA-006_gg_ta_complementarity.md|EXP-011 — совместная польза GG и TA]].
 
 ## Screening семейств моделей
 
@@ -128,7 +151,8 @@ coarse tuning; новый champion на этапе screening автоматич�
 
 | Priority | Hypothesis | Expected impact | Effort | Status |
 |---|---|---|---|---|
-|  |  |  |  |  |
+| 1 | Другие региональные пары добавляют сигнал сверх EXP-009 | Завершить Spearman-gate, выбор и validation одного кандидата | medium | EXP-010: AP-screening завершён, полный gate pending |
+| 2 | GG и TA дополняют друг друга | Сравнить +GG+TA с обоими одиночными кандидатами | medium | IDEA-006: предложение EXP-011, не запускался |
 
 ## Все эксперименты
 

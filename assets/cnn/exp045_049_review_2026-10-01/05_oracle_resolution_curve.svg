@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="455" viewBox="0 0 1000 455">
+<rect width="100%" height="100%" fill="white"/>
+<style>text{font-family:Arial,"DejaVu Sans",sans-serif;fill:#172033}.title{font-size:20px;font-weight:700}.axis{font-size:12px}.small{font-size:11px}.value{font-size:11px;font-weight:700}</style>
+<text x="500" y="30" text-anchor="middle" class="title">Label-oracle: AP растёт при механическом раскрытии target</text>
+<line x1="70" y1="410.0" x2="965" y2="410.0" stroke="#dbe3ed"/>
+<text x="60" y="414.0" text-anchor="end" class="axis">0.00</text>
+<line x1="70" y1="343.3" x2="965" y2="343.3" stroke="#dbe3ed"/>
+<text x="60" y="347.3" text-anchor="end" class="axis">0.20</text>
+<line x1="70" y1="276.7" x2="965" y2="276.7" stroke="#dbe3ed"/>
+<text x="60" y="280.7" text-anchor="end" class="axis">0.40</text>
+<line x1="70" y1="210.0" x2="965" y2="210.0" stroke="#dbe3ed"/>
+<text x="60" y="214.0" text-anchor="end" class="axis">0.60</text>
+<line x1="70" y1="143.3" x2="965" y2="143.3" stroke="#dbe3ed"/>
+<text x="60" y="147.3" text-anchor="end" class="axis">0.80</text>
+<line x1="70" y1="76.7" x2="965" y2="76.7" stroke="#dbe3ed"/>
+<text x="60" y="80.7" text-anchor="end" class="axis">1.00</text>
+<polyline points="70.0,76.7 197.9,177.0 325.7,244.1 453.6,286.9 581.4,313.4 709.3,330.6 837.1,341.7 965.0,349.3" fill="none" stroke="#7c3aed" stroke-width="3"/>
+<circle cx="70.0" cy="76.7" r="6" fill="#7c3aed"/><text x="70.0" y="66.7" text-anchor="middle" class="value">1.000</text><text x="70.0" y="432" text-anchor="middle" class="axis">R1</text>
+<circle cx="197.9" cy="177.0" r="6" fill="#7c3aed"/><text x="197.9" y="167.0" text-anchor="middle" class="value">0.699</text><text x="197.9" y="432" text-anchor="middle" class="axis">R2</text>
+<circle cx="325.7" cy="244.1" r="6" fill="#7c3aed"/><text x="325.7" y="234.1" text-anchor="middle" class="value">0.498</text><text x="325.7" y="432" text-anchor="middle" class="axis">R4</text>
+<circle cx="453.6" cy="286.9" r="6" fill="#7c3aed"/><text x="453.6" y="276.9" text-anchor="middle" class="value">0.369</text><text x="453.6" y="432" text-anchor="middle" class="axis">R8</text>
+<circle cx="581.4" cy="313.4" r="6" fill="#7c3aed"/><text x="581.4" y="303.4" text-anchor="middle" class="value">0.290</text><text x="581.4" y="432" text-anchor="middle" class="axis">R16</text>
+<circle cx="709.3" cy="330.6" r="6" fill="#7c3aed"/><text x="709.3" y="320.6" text-anchor="middle" class="value">0.238</text><text x="709.3" y="432" text-anchor="middle" class="axis">R32</text>
+<circle cx="837.1" cy="341.7" r="6" fill="#7c3aed"/><text x="837.1" y="331.7" text-anchor="middle" class="value">0.205</text><text x="837.1" y="432" text-anchor="middle" class="axis">R64</text>
+<circle cx="965.0" cy="349.3" r="6" fill="#7c3aed"/><text x="965.0" y="339.3" text-anchor="middle" class="value">0.182</text><text x="965.0" y="432" text-anchor="middle" class="axis">R128</text>
+<line x1="70" y1="377.5" x2="965" y2="377.5" stroke="#64748b" stroke-dasharray="7 5"/><text x="965" y="370.5" text-anchor="end" class="small">EXP045 AP=0.0976</text>
+</svg>

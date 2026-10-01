@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500">
+<rect width="100%" height="100%" fill="white"/>
+<style>text{font-family:Arial,"DejaVu Sans",sans-serif;fill:#172033}.title{font-size:20px;font-weight:700}.axis{font-size:12px}.small{font-size:11px}.value{font-size:11px;font-weight:700}</style>
+<text x="450" y="30" text-anchor="middle" class="title">Network A: detection ↔ count ordering</text>
+<line x1="150.9" y1="65" x2="150.9" y2="430" stroke="#dbe3ed"/><text x="150.9" y="450" text-anchor="middle" class="axis">0.05</text>
+<line x1="363.6" y1="65" x2="363.6" y2="430" stroke="#dbe3ed"/><text x="363.6" y="450" text-anchor="middle" class="axis">0.08</text>
+<line x1="576.4" y1="65" x2="576.4" y2="430" stroke="#dbe3ed"/><text x="576.4" y="450" text-anchor="middle" class="axis">0.11</text>
+<line x1="789.1" y1="65" x2="789.1" y2="430" stroke="#dbe3ed"/><text x="789.1" y="450" text-anchor="middle" class="axis">0.14</text>
+<line x1="80" y1="391.6" x2="860" y2="391.6" stroke="#dbe3ed"/><text x="70" y="395.6" text-anchor="end" class="axis">0.12</text>
+<line x1="80" y1="314.7" x2="860" y2="314.7" stroke="#dbe3ed"/><text x="70" y="318.7" text-anchor="end" class="axis">0.16</text>
+<line x1="80" y1="237.9" x2="860" y2="237.9" stroke="#dbe3ed"/><text x="70" y="241.9" text-anchor="end" class="axis">0.20</text>
+<line x1="80" y1="161.1" x2="860" y2="161.1" stroke="#dbe3ed"/><text x="70" y="165.1" text-anchor="end" class="axis">0.24</text>
+<line x1="80" y1="84.2" x2="860" y2="84.2" stroke="#dbe3ed"/><text x="70" y="88.2" text-anchor="end" class="axis">0.28</text>
+<circle cx="746.1" cy="363.8" r="8" fill="#64748b"/><text x="758.1" y="355.8" class="value">A-v0 20k</text>
+<circle cx="191.5" cy="277.2" r="8" fill="#2563eb"/><text x="203.5" y="269.2" class="value">A-v1 5k</text>
+<circle cx="471.1" cy="172.4" r="8" fill="#2563eb"/><text x="483.1" y="164.4" class="value">A-v1 10k</text>
+<circle cx="731.2" cy="137.7" r="8" fill="#2563eb"/><text x="743.2" y="129.7" class="value">A-v1 20k</text>
+<text x="470.0" y="475" text-anchor="middle" class="axis">Regional AP (R16, held-out fold 0)</text>
+<text x="18" y="250" text-anchor="middle" class="axis" transform="rotate(-90 18 250)">Spearman count среди active R16</text>
+</svg>

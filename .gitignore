@@ -33,3 +33,20 @@ data/processed/*
 # Локальные модели и полные результаты запусков
 artifacts/*
 !artifacts/_index.md
+
+# Cloud/Kaggle bundles and model checkpoints are reproducible build artifacts,
+# not source files.  Public notebooks and lightweight plots stay versioned.
+*.zip
+*.tgz
+*.tar.gz
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*.dat
+
+# Local test/tool caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/

@@ -7,7 +7,8 @@ owner:
 created: "{{date}}"
 updated:
 stage:
-primary_metric:
+primary_metric: average_precision
+secondary_metric: epic_spearman
 tags:
   - ml/hypothesis
 ---
@@ -29,8 +30,9 @@ tags:
 ## Формулировка
 
 **Если** …<br>
-**то** основная метрика …<br>
-**изменится минимум на** …<br>
+**то** Average Precision …<br>
+**а EPIC Spearman** …<br>
+**изменятся минимум на / не ухудшатся больше чем** …<br>
 **потому что** …
 
 ## Механизм
@@ -41,7 +43,8 @@ tags:
 
 | Метрика | Baseline | Ожидание | Минимум для принятия |
 |---|---:|---:|---:|
-|  |  |  |  |
+| Average Precision |  |  |  |
+| EPIC Spearman |  |  |  |
 
 - **Ожидаемые guardrails:**
 - **Ожидаемая стоимость / latency:**

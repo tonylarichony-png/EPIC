@@ -1,91 +1,140 @@
 ---
 type: ml-project
-status: idea
-stage: problem
+status: active
+stage: experiments
 owner:
-best_result:
-last_reviewed:
+best_result: "CNN-EXP-047-B: validation AP 0.104211926; EPIC Spearman 0.202291612"
+last_reviewed: 2026-10-01
 tags:
   - ml/project
 ---
 
-# ML Project — Dashboard
+# EPIC — предсказание инициации транскрипции из ДНК
 
 > [!abstract] Назначение
-> Главная точка входа в проект. Здесь хранится только текущее состояние и навигация; подробности находятся в связанных документах.
+> Открытый исследовательский журнал по предсказанию base-resolution профиля
+> инициации транскрипции РНК-полимеразой II из последовательности ДНК.
+> Репозиторий объединяет Obsidian vault, воспроизводимые notebooks, код моделей,
+> отрицательные результаты и честные сравнения на contig-heldout validation.
 
-## Быстрый старт
+## Что посмотреть в первую очередь
 
-1. Выберите нужные разделы в [[PROJECT_CONFIG.md|настройке проекта]].
-2. Заполните карточку проекта ниже.
-3. Сформулируйте задачу в [[docs/00_problem.md]].
-4. Поместите исходные файлы в `data/raw/`, запустите [[notebooks/01_data.ipynb|паспорт данных]] и дополните [[docs/01_data.md]].
-5. Запустите [[notebooks/02_eda.ipynb|основной EDA]], затем [[notebooks/02_eda_anomalies.ipynb|обзор выбросов]], заполните [[docs/02_eda.md]] и превратите наблюдения в проверяемые рекомендации.
-6. Зафиксируйте честную проверку качества в [[docs/03_validation.md]] **до сравнения моделей**.
-7. Опишите model-ready выборку и preprocessing в [[docs/04_features.md]].
-8. Настройте `src/ml_project/baseline_config.py` и запустите [[notebooks/03_baseline.ipynb|первый воспроизводимый baseline]].
-9. Для каждой контролируемой проверки используйте [[#Как начать новый эксперимент|короткую инструкцию создания эксперимента]].
-10. Когда feature set стабилизирован, переходите к [[#Как начать групповой screening моделей|групповому screening моделей]].
-11. Для проверки выбранного кандидата на Kaggle используйте [[#Как сделать Kaggle submission|универсальный submission notebook]].
-12. Для нестандартных исследований и решений используйте встроенную команду Obsidian **Templates: Insert template**.
+| Раздел | Содержание |
+|---|---|
+| [Итоги CNN-EXP-045—049](docs/CNN_EXP045_049_RESULTS_REVIEW_2026-10-01.md) | главный сравнительный отчёт, таблицы, графики и решения |
+| [Реестр CNN](cnn_exp/_index.md) | история архитектурных экспериментов и measured champion |
+| [Каталог notebooks](notebooks/README.md) | какие notebooks открывать, что они проверяют и как скачать |
+| [Воспроизводимость](docs/REPRODUCIBILITY.md) | окружение, данные, команды и границы публичного репозитория |
+| [Validation protocol](docs/03_validation.md) | split по contig, whitelist и определения AP/Spearman |
+| [Постановка задачи](docs/00_problem.md) | биологическая и ML-формулировка |
+| [Полный Obsidian workflow](GUIDE.md) | устройство vault и правила фиксации экспериментов |
 
-Полная инструкция: [[GUIDE.md|Как пользоваться шаблоном]].
+GitHub отображает notebooks прямо в браузере. Для скачивания отдельного
+notebook откройте его и нажмите **Download raw file**; для получения всей
+истории используйте `git clone` или **Code → Download ZIP**.
+
+## Главные измеренные результаты
+
+| Эксперимент | Архитектура / изменение | Genome-wide AP | EPIC Spearman | Решение |
+|---|---|---:|---:|---|
+| CNN-EXP-045 | WIDTH512, RF1029, 50k | 0.097630094 | 0.200124323 | reference |
+| **CNN-EXP-047-B** | paired risk-focused continuation | **0.104211926** | **0.202291612** | measured AP champion |
+| CNN-EXP-048 | ultra-tail risk refinement | 0.082120732 | 0.197690110 | reject |
+| CNN-EXP-049 joint | R16 A→FiLM→B, 50k | 0.104208798 | 0.130878357 | reject: champion не превзойдён |
+
+Цель текущей серии — `AP ≥ 0.15`. EXP049 подтвердил пользу регионального
+conditioning относительно matched control (`+0.030431 AP` при 50k), но итогом
+практически точно воспроизвёл EXP047-B, а не создал новый уровень качества.
+
+![Сравнение последних CNN](assets/cnn/exp045_049_review_2026-10-01/01_overall_ap_comparison.svg)
+
+> [!warning] Интерпретация результатов
+> Validation split многократно использовался для exploratory архитектурных
+> решений. Значения полезны для сравнения зафиксированных веток, но не являются
+> несмещённой оценкой leaderboard generalization. Label-oracle результаты —
+> только диагностика и никогда не используются как признаки или teacher targets.
+
+## Данные и публичные артефакты
+
+Исходные genome/annotation/count данные не хранятся в Git. Репозиторий содержит
+описание ожидаемой структуры, preprocessing-код, notebooks и небольшие
+сводные графики. Checkpoints, memmap-cache и Kaggle ZIP-бандлы также исключены:
+они зависят от локальных данных и превышают разумный размер source repository.
+
+- [Справочник jaNemVect1.1](docs/jaNemVect1.1_file_guide.md)
+- [Учебный train/validation/test notebook](notebooks/01_train_validation_test.ipynb)
+- [Cloud-инструкция EXP049](docs/CNN_EXP049_CLOUD_TRAINING.md)
+
+## Быстрый локальный запуск
+
+```powershell
+git clone https://github.com/tonylarichony-png/EPIC.git
+cd EPIC
+conda env create -f environment-eda.yml
+conda activate epic-eda
+$env:PYTHONPATH = "$PWD\src"
+python -m pytest -q
+```
+
+После размещения исходных файлов согласно справочнику откройте JupyterLab или
+сам vault в Obsidian. Точные команды и ограничения приведены в
+[документе воспроизводимости](docs/REPRODUCIBILITY.md).
 
 ## Карточка проекта
 
 | Поле | Значение |
 |---|---|
-| Проект |  |
-| Цель проекта |  |
-| ML-задача |  |
-| Владелец |  |
-| Статус | `idea` |
-| Текущий этап | `problem` |
-| Основная метрика | `= [[docs/00_problem]].primary_metric` |
-| Baseline |  |
-| Лучший результат |  |
-| Репозиторий / код |  |
-| Трекер / MLflow |  |
+| Проект | EPIC DNA-to-TSS initiation prediction |
+| Цель проекта | Сильный generalizable genome-wide AP на base-resolution target |
+| ML-задача | Extremely imbalanced sequence-to-profile ranking |
+| Владелец | tonylarichony-png |
+| Статус | `active` |
+| Текущий этап | `experiments` |
+| Обязательные метрики | **Average Precision (AP)** + **EPIC Spearman** (Pearson по dense ranks на `target > 0`) |
+| Baseline | [[experiments/EXP-001.md|EXP-001]] — L2 logistic regression по ориентированному динуклеотиду `[-1,0]` |
+| Лучший CNN-результат | [[cnn_exp/CNN-EXP-047.md|CNN-EXP-047-B]]: validation AP **0.104211926**, EPIC Spearman **0.202291612** |
+| Лучший interpretable feature result | [[experiments/EXP-009.md|EXP-009]]: AP **0.002363735**, EPIC Spearman **0.115517** |
+| Репозиторий / код | https://github.com/tonylarichony-png/EPIC |
+| Полный последний отчёт | [[docs/CNN_EXP045_049_RESULTS_REVIEW_2026-10-01.md|CNN-EXP-045—049]] |
 
 ## Фокус сейчас
 
 > [!todo] Следующее действие
 > Одно конкретное действие, которое двигает проект вперёд.
 
-- **Текущая цель:**
-- **Активная гипотеза:**
-- **Активный эксперимент:**
-- **Главный блокер:**
-- **Следующая контрольная точка:**
+- **Текущая цель:** спроектировать следующий кандидат, способный превзойти measured CNN champion `AP=0.104211926` и приблизиться к `AP=0.15`.
+- **Активные гипотезы:** [[hypotheses/H-001.md|H-001]]–[[hypotheses/H-004.md|H-004]].
+- **Проведённые эксперименты:** EXP-001 остаётся baseline; EXP-002/003 приняты в lookup-серии; EXP-004/005/006/008 отклонены; [[experiments/EXP-009.md|EXP-009]] принят как feature champion.
+- **Банк идей:** [[experiment-ideas/_index.md|ширина контекста, состав, взаимодействия и lowercase]].
+- **Главный вывод серии:** CpG O/E201 дал +15.10% AP против EXP-007 и повысил EPIC Spearman до 0.115517.
+- **EXP-010:** AP-screening всех 15 пар завершён; GG +4.445%, TA +3.920%, TG +2.860% к mean train-CV AP EXP-009. Полного Spearman нет, validation не подтверждён; champion не изменён.
+- **Последняя контрольная точка:** [[docs/CNN_EXP045_049_RESULTS_REVIEW_2026-10-01.md|EXP049 joint 50k]] сравнялся с EXP047-B по AP, но не превзошёл его; простое масштабирование каскада остановлено.
+- **Краткие результаты выполненного EDA:** [[docs/02_eda.md#Быстрые выводы|быстрые выводы]] и [[eda/findings/_index.md|карточки EDA-001…EDA-005]].
 
 ## Как начать новый эксперимент
 
 > [!tip] Новый контролируемый эксперимент
 > 1. Активируйте окружение проекта.
-> 2. Для первой проверки создайте лабораторию командой `.\new-experiment.cmd --workbench-only`; для следующих запустите `.\new-experiment.cmd`, чтобы создать модуль и workbench вместе.
-> 3. Разработайте и проверьте идею в напечатанном `notebooks/workbench/EXP-xxx_*.ipynb`.
-> 4. Перенесите проверенную реализацию в выбранный модуль `src/ml_project/experiments/exp_xxx_*.py`.
-> 5. Перезапустите kernel и выполните строгий [[notebooks/04_experiment.ipynb]] сверху вниз.
-> 6. Разберите автоматически сохранённые OOF-ошибки и путь нового признака в
->    [[notebooks/05_diagnostics.ipynb]], если результат требует объяснения.
-> 7. В frontmatter карточки эксперимента укажите EDA-основания, например
->    `eda_findings: ["EDA-003"]`.
-> 8. После интерпретации измените `decision:` во frontmatter этой же карточки
->    на `adopt`, `reject`, `iterate` или `inconclusive`, затем запустите
->    `sync-experiment-state.cmd`. Переобучение не требуется; следующий launcher
->    автоматически использует последнюю карточку с `decision: adopt`.
+> 2. Из корня проекта запустите `.\new-epic-experiment.cmd`.
+> 3. Ответьте на пять вопросов: название, гипотеза, единственное изменение,
+>    критерий успеха и место кода (`module` рекомендуется, `notebook` допустим).
+>    Команда сама выберет следующий `EXP-xxx` и последний сохранённый
+>    `adopt`-champion.
+> 4. Откройте созданный `notebooks/experiments/EXP-xxx_*.ipynb` и сначала
+>    проверьте зафиксированный план.
+> 5. Вместе заполните только новый признак и candidate-код в созданном модуле
+>    или ячейке. Общий split загружается из `src/ml_project/epic_data.py`.
+> 6. После запуска заполните интерпретацию и решение: `adopt`, `reject`,
+>    `iterate` или `inconclusive`.
+> 7. Сохраните машинную запись запуска из последней ячейки и перенесите краткий
+>    вывод в созданную карточку `experiments/EXP-xxx.md`.
 >
-> Launcher сам предложит следующий `EXP-xxx`, критерии и guardrails, покажет
-> preview, родителя и выберет новый модуль. `--from-baseline` создаёт независимую
-> проверку без champion. Workbench не пишет официальные результаты и игнорируется
-> Git; Python-модуль остаётся source of truth для кода, а Markdown-карточка —
-> для решения и EDA-связей.
+> Каждый эксперимент имеет свой читаемый notebook, но подготовка BED/target и
+> train/validation/test не копируется. Поэтому результаты используют один data
+> contract и остаются сопоставимыми.
 
-В experiment-коде `ModelingSettings` описывает способ построения и оценки
-модели: `reference_settings` приходят от baseline/чемпиона, а
-`candidate_settings` содержат только изменение текущей гипотезы.
-
-Подробности полей, критериев и жизненного цикла: [[GUIDE.md#Новый эксперимент|руководство по новому эксперименту]].
+Полный процесс, границы ответственности и сравнение с `epic_solution`:
+[[docs/epic_experiment_workflow.md]].
 
 ## Как начать групповой screening моделей
 
@@ -156,7 +205,18 @@ MS-run: Candidate ID всегда обозначает уже измеренны
 
 | Версия / эксперимент | Метрика | Значение | Δ к baseline | Решение |
 |---|---:|---:|---:|---|
-| Baseline |  |  | — |  |
+| [[experiments/EXP-001.md|EXP-001]] | Average Precision | **0.001330258** | +0.000659614 к constant reference | `adopt` |
+| [[experiments/EXP-001.md|EXP-001]] | EPIC Spearman | **0.090720** | +0.090720 к no-ranking reference | `adopt` |
+| [[experiments/EXP-002.md|EXP-002]] | Average Precision | **0.001486787** | +11.77% к 2-mer lookup | `adopt` |
+| [[experiments/EXP-002.md|EXP-002]] | EPIC Spearman | **0.094232** | +0.003512 к 2-mer lookup | `adopt` |
+| [[experiments/EXP-003.md|EXP-003]] | Average Precision | **0.001600537** | +7.65% к 4-mer lookup | `adopt` |
+| [[experiments/EXP-003.md|EXP-003]] | EPIC Spearman | **0.097186** | +0.002954 к 4-mer lookup | `adopt` |
+| [[experiments/EXP-004.md|EXP-004]] | Average Precision | 0.001603481 | +0.18% к 6-mer lookup | `reject` |
+| [[experiments/EXP-004.md|EXP-004]] | EPIC Spearman | 0.092203 | −0.004983 к 6-mer lookup | `reject` |
+| [[experiments/EXP-007.md|EXP-007]] | Average Precision | **0.002053635** | +28.31% к EXP-003 | `adopt` |
+| [[experiments/EXP-007.md|EXP-007]] | EPIC Spearman | **0.104302** | +0.007117 к EXP-003 | `adopt` |
+| [[experiments/EXP-009.md|EXP-009]] | Average Precision | **0.002363735** | +15.10% к EXP-007 | `adopt` |
+| [[experiments/EXP-009.md|EXP-009]] | EPIC Spearman | **0.115517** | +0.011215 к EXP-007 | `adopt` |
 
 <!-- auto:key-results:end -->
 
@@ -167,7 +227,8 @@ MS-run: Candidate ID всегда обозначает уже измеренны
 
 | Решение | Дата | Причина | Что изменилось |
 |---|---|---|---|
-|  |  |  |  |
+| Принять EXP-001 как baseline | 2026-09-16 | AP вырос в 1.9836×, Spearman положителен на всех validation-contig | Появился воспроизводимый reference из 17 категорий динуклеотида |
+| Выбрать 6-mer как champion ширины контекста | 2026-09-16 | EXP-003 дал +7.65% AP и улучшил Spearman; EXP-004 добавил лишь +0.18% AP и снизил Spearman | Следующий LR-эксперимент должен исходить из окна `[-5,0]` |
 
 ## Риски и блокеры
 
@@ -175,9 +236,9 @@ MS-run: Candidate ID всегда обозначает уже измеренны
 
 ## Ближайшие действия
 
-- [ ]
-- [ ]
-- [ ]
+- [ ] Дополнить AP-screening EXP-010 недостающим Spearman и сохранить полную таблицу CV; см. [[eda/findings/EDA-005.md|EDA-005]].
+- [ ] Применить исходный gate, зафиксировать одного кандидата до validation и сохранить итоговый run.
+- [ ] Перед запуском согласовать [[experiment-ideas/IDEA-006_gg_ta_complementarity.md|протокол EXP-011]]: EXP-009, +GG, +TA, +GG+TA; обе метрики сохранять после каждого fit.
 
 ## Рабочий принцип
 

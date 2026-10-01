@@ -1,0 +1,10 @@
+experiment,variant,ap5,epic_spearman,family
+EXP045,WIDTH512 50k,0.097630094,0.200124323,direct
+EXP046B,frozen R32 correction,0.09886756,,direct
+EXP047-A,matched continuation,0.093970943,0.192573186,direct
+EXP047-B,risk loss,0.104211926,0.202291612,direct
+EXP048,ultra-tail loss,0.082120732,0.19769011,direct
+049 ctrl 20k,"B, zero condition",0.046371994,0.120001431,joint-pilot
+049 joint 20k,A→FiLM→B,0.092451843,0.128554933,joint-pilot
+049 ctrl 50k,"B, zero condition",0.073778159,0.133377696,joint-pilot
+049 joint 50k,A→FiLM→B,0.104208798,0.130878357,joint-pilot

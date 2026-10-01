@@ -1,0 +1,18 @@
+name: epic-eda
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - numpy
+  - pandas
+  - scipy
+  - scikit-learn
+  - matplotlib
+  - seaborn
+  - jupyterlab
+  - nbclient
+  - nbformat
+  - ipykernel
+  - threadpoolctl
+  - pyyaml
+  - pytest

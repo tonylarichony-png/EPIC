@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="480" viewBox="0 0 1100 480">
+<rect width="100%" height="100%" fill="white"/>
+<style>text{font-family:Arial,"DejaVu Sans",sans-serif;fill:#172033}.title{font-size:20px;font-weight:700}.axis{font-size:12px}.small{font-size:11px}.value{font-size:11px;font-weight:700}</style>
+<text x="550" y="30" text-anchor="middle" class="title">EXP049B: AP по validation contig</text>
+<line x1="70" y1="380.0" x2="1070" y2="380.0" stroke="#dbe3ed"/>
+<text x="60" y="384.0" text-anchor="end" class="axis">0.00</text>
+<line x1="70" y1="279.2" x2="1070" y2="279.2" stroke="#dbe3ed"/>
+<text x="60" y="283.2" text-anchor="end" class="axis">0.04</text>
+<line x1="70" y1="178.4" x2="1070" y2="178.4" stroke="#dbe3ed"/>
+<text x="60" y="182.4" text-anchor="end" class="axis">0.08</text>
+<line x1="70" y1="77.6" x2="1070" y2="77.6" stroke="#dbe3ed"/>
+<text x="60" y="81.6" text-anchor="end" class="axis">0.12</text>
+<rect x="105.0" y="262.5" width="48" height="117.5" fill="#fcd34d"/>
+<text x="129.0" y="257.5" text-anchor="middle" class="small">0.047</text>
+<rect x="161.0" y="137.8" width="48" height="242.2" fill="#93c5fd"/>
+<text x="185.0" y="132.8" text-anchor="middle" class="small">0.096</text>
+<rect x="217.0" y="197.5" width="48" height="182.5" fill="#f59e0b"/>
+<text x="241.0" y="192.5" text-anchor="middle" class="small">0.072</text>
+<rect x="273.0" y="107.4" width="48" height="272.6" fill="#2563eb"/>
+<text x="297.0" y="102.4" text-anchor="middle" class="small">0.108</text>
+<rect x="329.0" y="118.9" width="48" height="261.1" fill="#64748b"/>
+<text x="353.0" y="113.9" text-anchor="middle" class="small">0.104</text>
+<text x="245.0" y="402" text-anchor="middle" class="axis">NC_064034.1</text>
+<rect x="438.3" y="274.5" width="48" height="105.5" fill="#fcd34d"/>
+<text x="462.3" y="269.5" text-anchor="middle" class="small">0.042</text>
+<rect x="494.3" y="173.8" width="48" height="206.2" fill="#93c5fd"/>
+<text x="518.3" y="168.8" text-anchor="middle" class="small">0.082</text>
+<rect x="550.3" y="209.5" width="48" height="170.5" fill="#f59e0b"/>
+<text x="574.3" y="204.5" text-anchor="middle" class="small">0.068</text>
+<rect x="606.3" y="142.2" width="48" height="237.8" fill="#2563eb"/>
+<text x="630.3" y="137.2" text-anchor="middle" class="small">0.094</text>
+<rect x="662.3" y="138.1" width="48" height="241.9" fill="#64748b"/>
+<text x="686.3" y="133.1" text-anchor="middle" class="small">0.096</text>
+<text x="578.3" y="402" text-anchor="middle" class="axis">NC_064041.1</text>
+<rect x="771.7" y="253.5" width="48" height="126.5" fill="#fcd34d"/>
+<text x="795.7" y="248.5" text-anchor="middle" class="small">0.050</text>
+<rect x="827.7" y="137.4" width="48" height="242.6" fill="#93c5fd"/>
+<text x="851.7" y="132.4" text-anchor="middle" class="small">0.096</text>
+<rect x="883.7" y="176.7" width="48" height="203.3" fill="#f59e0b"/>
+<text x="907.7" y="171.7" text-anchor="middle" class="small">0.081</text>
+<rect x="939.7" y="110.3" width="48" height="269.7" fill="#2563eb"/>
+<text x="963.7" y="105.3" text-anchor="middle" class="small">0.107</text>
+<rect x="995.7" y="98.5" width="48" height="281.5" fill="#64748b"/>
+<text x="1019.7" y="93.5" text-anchor="middle" class="small">0.112</text>
+<text x="911.7" y="402" text-anchor="middle" class="axis">NC_064042.1</text>
+<rect x="90" y="440" width="14" height="14" fill="#fcd34d"/><text x="110" y="452" class="small">control 20k</text>
+<rect x="285" y="440" width="14" height="14" fill="#93c5fd"/><text x="305" y="452" class="small">joint 20k</text>
+<rect x="480" y="440" width="14" height="14" fill="#f59e0b"/><text x="500" y="452" class="small">control 50k</text>
+<rect x="675" y="440" width="14" height="14" fill="#2563eb"/><text x="695" y="452" class="small">joint 50k</text>
+<rect x="870" y="440" width="14" height="14" fill="#64748b"/><text x="890" y="452" class="small">EXP047-B</text>
+</svg>

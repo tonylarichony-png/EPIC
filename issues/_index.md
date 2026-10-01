@@ -11,6 +11,19 @@ entity: issue
 
 - …
 
+## Решённые
+
+- [[issues/ISSUE-001 EXP-009 kernel crash при подсчёте CpG.md|ISSUE-001 — EXP-009: kernel crash при подсчёте CpG]] — OOM устранён fixed bins и bounded-memory подсчётом.
+- [[issues/ISSUE-002 EXP-009 ошибка Series reset_index при сохранении.md|ISSUE-002 — EXP-009: ошибка Series.reset_index при сохранении]] — исправлен неподходящий аргумент `names=`.
+
+## Как фиксировать будущие ошибки
+
+Создайте отдельную заметку из [[templates/issue.md|шаблона issue]] со следующим
+номером `ISSUE-xxx`. Обязательно сохраните падающую ячейку или команду, последний
+вывод, объём данных, способ воспроизведения, проверенные гипотезы, root cause,
+исправление и измерение до/после. Исчезновение kernel без traceback сначала
+рассматривайте как возможный OOM или native crash.
+
 ## Все заметки
 
 ```query
